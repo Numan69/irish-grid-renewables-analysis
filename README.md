@@ -8,6 +8,12 @@ An end-to-end analytics project using **140,256 quarter-hourly records** of offi
 
 ---
 
+## 💡 Why I Built This
+
+I want to use my data skills in Ireland's energy sector, so I wanted a project built on real Irish data instead of a tutorial dataset. I am studying for an MSc in Business Analytics in Dublin, and electricity is a topic that affects everyone here, from rising demand and data centres to new wind farms. My goal was to build a complete project on my own, from raw files to a finished dashboard, and answer one simple question: is wind keeping up with demand? The result that surprised me most was how much wind energy is wasted, more than 13% of available wind in 2025.
+
+---
+
 ## 📌 Business Questions
 
 1. How has electricity demand changed, and when does it peak?
@@ -135,6 +141,30 @@ Annual totals were checked to match across **Python, MySQL and Power BI**:
 | 2023 | 32.50 | 35.1% | 1.1% | 5,442 | 10.2% |
 | 2024 | 33.72 | 33.0% | 2.0% | 5,691 | 11.5% |
 | 2025 | 34.61 | 32.7% | 3.1% | 6,012 | 13.1% |
+
+---
+
+## 🧩 Challenges and What I Learned
+
+**1. Finding the right data**
+- **Problem:** I first planned to download data from the EirGrid Smart Grid Dashboard, but it did not give me the data in the format I needed.
+- **What I did:** I found EirGrid's official quarter-hourly system data files and checked each one for missing values, row counts and column changes before using it.
+- **What I learned:** The first data source is not always the best one, and checking the data early saves time later.
+
+**2. Connecting Power BI to MySQL**
+- **Problem:** Power BI kept asking me to install extra components, even after I installed the latest MySQL Connector/NET.
+- **What I did:** I found that Power BI only works with the 8.0.x version of the connector, not 9.x. I installed an 8.0.x version and the connection worked.
+- **What I learned:** The newest version of a tool is not always the right one, and reading community forums helps to solve real problems.
+
+**3. A wrong number on my dashboard**
+- **Problem:** My Demand YoY % card showed 35.4% growth, which was far too high.
+- **What I did:** I found that with all years selected, Power BI compared four years of data with only three years. I changed the measure with `HASONEVALUE` so it only calculates when one year is selected. I then checked the new result (+3.1% for winter 2025) against my SQL numbers.
+- **What I learned:** Always ask if a number makes sense before trusting it.
+
+**4. Testing my own idea**
+- **Problem:** I thought solar power was the main reason wind energy was being wasted.
+- **What I did:** I wrote a SQL query to check wasted wind by hour of day. Waste was high at midday, but almost as high at 3am, when there is no solar at all.
+- **What I learned:** An idea is only a guess until the data supports it. The data pointed to grid constraints and low night demand as bigger causes.
 
 ---
 
